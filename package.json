@@ -9,7 +9,15 @@
     "lint": "eslint",
     "db:setup": "npx tsx scripts/db-setup.ts",
     "db:reset": "npx tsx scripts/db-reset.ts",
-    "db:seed": "npx tsx scripts/seed-data.ts"
+    "db:list-users": "npx tsx scripts/list-users.ts",
+    "db:promote-admin": "npx tsx scripts/promote-super-admin.ts",
+    "db:seed": "npx tsx scripts/seed-production.ts",
+    "db:seed:demo": "npx tsx scripts/seed-data.ts",
+    "optimize-images": "python scripts/optimize_images_to_webp.py --update-code",
+    "optimize-images:full": "python scripts/optimize_images_to_webp.py --update-code --prune-originals --force",
+    "assets:reorganize": "python scripts/reorganize_public_assets.py",
+    "assets:verify": "python scripts/verify_image_assets.py",
+    "assets:excellence": "python scripts/import_our_excellence.py"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.20",

@@ -35,6 +35,9 @@ export function TrustedBySection() {
         cr={1.5}
       />
       <div className="relative z-10 mx-auto mb-10 max-w-2xl px-6 text-center">
+        <h2 className="text-[28px] md:text-[32px] font-medium text-gray-900 mb-3 tracking-tight">
+          Partners &amp; Logos
+        </h2>
         <p className="text-[15px] leading-relaxed text-gray-600 md:text-[16px]">
           Logos represent leagues, clubs, and programmes we collaborate with for physiotherapy, rehab, and performance support.
         </p>

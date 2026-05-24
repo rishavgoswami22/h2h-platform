@@ -17,7 +17,7 @@ import { Marquee } from '@/components/ui/magic-components';
 import { createClient } from '@/lib/supabase/client';
 import type { User } from '@supabase/supabase-js';
 
-const phoneTel = `tel:${APP_CONFIG.phone.replace(/\s/g, '')}`;
+const phoneTel = `tel:${APP_CONFIG.phoneE164}`;
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -92,7 +92,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
             <Image
-              src="/h2hLogo-caps.png"
+              src="/images/brand/logo-caps.webp"
               alt="H2H Healthcare"
               width={133}
               height={45}

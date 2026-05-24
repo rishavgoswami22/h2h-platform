@@ -21,7 +21,7 @@ export function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2 mb-5">
               <Image
-                src="/h2hLogo-caps.png"
+                src="/images/brand/logo-caps.webp"
                 alt="H2H Healthcare"
                 width={133}
                 height={45}
@@ -112,8 +112,8 @@ export function Footer() {
                   <Phone className="h-4 w-4 text-blue-400" />
                 </div>
                 <div>
-                  <p className="text-[11px] text-gray-500 mb-0.5">Toll Free</p>
-                  <a href={`tel:${APP_CONFIG.phone.replace(/\s/g, '')}`} className="text-[13px] text-gray-300 hover:text-cyan-400 transition-colors">
+                  <p className="text-[11px] text-gray-500 mb-0.5">Contact number</p>
+                  <a href={`tel:${APP_CONFIG.phoneE164}`} className="text-[13px] text-gray-300 hover:text-cyan-400 transition-colors">
                     {APP_CONFIG.phone}
                   </a>
                 </div>

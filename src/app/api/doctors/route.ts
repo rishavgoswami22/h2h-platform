@@ -4,6 +4,7 @@
  */
 
 import { createAdminClient } from '@/lib/supabase/server';
+import { resolveDoctorAvatarSrc } from '@/constants/doctor-avatars';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -13,9 +14,18 @@ export async function GET(request: NextRequest) {
     
     const locationId = searchParams.get('locationId');
     const serviceId = searchParams.get('serviceId');
+    const category = searchParams.get('category');
     const centerId = searchParams.get('centerId'); // Filter by specific clinic center
     const date = searchParams.get('date'); // YYYY-MM-DD format
     const mode = searchParams.get('mode'); // online, offline, both
+
+    const ONLINE_LOCATION_IDS = new Set([
+      'online',
+      '33333333-3333-3333-3333-333333333333',
+    ]);
+    const isOnlineContext =
+      mode === 'online' ||
+      (!!locationId && ONLINE_LOCATION_IDS.has(locationId));
 
     let query = supabase
       .from('doctors')
@@ -28,9 +38,8 @@ export async function GET(request: NextRequest) {
       `)
       .eq('is_active', true);
 
-    // Only filter by primary location if NO centerId is provided
-    // When centerId is provided, we want to check availability at that center regardless of primary location
-    if (locationId && locationId !== 'online' && !centerId) {
+    // Primary location filter — skip for online / worldwide telehealth
+    if (locationId && !isOnlineContext && !centerId) {
       query = query.eq('location_id', locationId);
     }
 
@@ -48,11 +57,28 @@ export async function GET(request: NextRequest) {
 
     // Filter by service if provided
     let filteredDoctors = doctors || [];
-    
-    if (serviceId) {
-      filteredDoctors = filteredDoctors.filter((doctor: any) => 
-        doctor.doctor_services?.some((s: any) => s.service_id === serviceId)
-      );
+
+    if (serviceId || category) {
+      let serviceIdsForFilter = new Set<string>();
+
+      if (serviceId) {
+        serviceIdsForFilter.add(serviceId);
+      }
+
+      if (category) {
+        const { data: categoryServices } = await supabase
+          .from('services')
+          .select('id')
+          .eq('category', category)
+          .eq('is_active', true);
+        categoryServices?.forEach((s) => serviceIdsForFilter.add(s.id));
+      }
+
+      if (serviceIdsForFilter.size > 0) {
+        filteredDoctors = filteredDoctors.filter((doctor: any) =>
+          doctor.doctor_services?.some((s: any) => serviceIdsForFilter.has(s.service_id))
+        );
+      }
     }
 
     // If date provided, filter by availability on that day
@@ -74,8 +100,8 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // Filter by center availability - check if doctor has availability at this center
-    if (centerId) {
+    // Filter by center availability — not applicable for online telehealth
+    if (centerId && !isOnlineContext) {
       filteredDoctors = filteredDoctors.filter((doctor: any) => {
         // Check if any of the doctor's availability slots include this center
         return doctor.doctor_availability?.some((a: any) => {
@@ -100,7 +126,11 @@ export async function GET(request: NextRequest) {
       id: doctor.id,
       name: doctor.users?.full_name || 'Unknown',
       email: doctor.users?.email,
-      avatar: doctor.users?.avatar_url,
+      avatar: resolveDoctorAvatarSrc({
+        name: doctor.users?.full_name,
+        email: doctor.users?.email,
+        avatar: doctor.users?.avatar_url,
+      }),
       phone: doctor.users?.phone,
       specializations: doctor.specializations || [],
       qualifications: doctor.qualifications || [],

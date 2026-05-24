@@ -1,28 +1,10 @@
 'use client';
 
 import GridMotion from "@/components/ui/grid-motion";
+import { EXCELLENCE_GALLERY } from "@/constants/marketing-images";
 
-/** All assets under public/our-excellence — grid cycles through these for image cells. */
-const EXCELLENCE_IMAGES = [
-  '/our-excellence/sai-ncoe-yoga.png',
-  '/our-excellence/ccl.jpg',
-  '/our-excellence/ccl2.jpg',
-  '/our-excellence/ccl3.jpg',
-  '/our-excellence/cricket.jpg',
-  '/our-excellence/football.jpg',
-  '/our-excellence/football-img.jpg',
-  '/our-excellence/mens-hockey.jpg',
-  '/our-excellence/hockey-champion.jpg',
-  '/our-excellence/bengal-u19.jpg',
-  '/our-excellence/rcb-womens.jpg',
-  '/our-excellence/president-with.jpg',
-  '/our-excellence/image-gym-akshat.jpeg',
-  '/our-excellence/gym-image-akshat.jpeg',
-  '/our-excellence/phsio-image-akshat.jpeg',
-] as const;
-
-/** 4×7 grid = 28 cells: two full passes through every photo. */
-const GRID_IMAGE_ITEMS: string[] = [...EXCELLENCE_IMAGES, ...EXCELLENCE_IMAGES];
+/** Two passes so the 4×7 motion grid stays full (19 originals × 2). */
+const GRID_IMAGE_ITEMS: string[] = [...EXCELLENCE_GALLERY, ...EXCELLENCE_GALLERY];
 
 export function GridMotionSection() {
   return (
@@ -36,7 +18,7 @@ export function GridMotionSection() {
 
       <div className="absolute inset-0 z-0 md:hidden bg-gray-950">
         <div className="absolute inset-0 grid grid-cols-3 gap-1.5 p-2 opacity-90">
-          {EXCELLENCE_IMAGES.slice(0, 9).map((src) => (
+          {EXCELLENCE_GALLERY.slice(0, 9).map((src) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               key={src}
@@ -59,7 +41,7 @@ export function GridMotionSection() {
             <span className="bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent">Excellence</span>
           </h2>
           <p className="text-[14px] sm:text-[16px] md:text-[18px] text-white/80 max-w-2xl mx-auto drop-shadow-lg">
-            Physio, sport, and rehab—through the teams and moments we support
+            Elite teams, national camps, and the moments we are proud to support
           </p>
         </div>
       </div>

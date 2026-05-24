@@ -30,7 +30,7 @@ export function FinalCTASection() {
             </Link>
           </Button>
           <Button size="lg" variant="outline" className="h-14 px-10 text-base font-bold bg-transparent text-white border-2 border-white/50 hover:bg-white/10 hover:border-white font-[family-name:var(--font-poppins)]" asChild>
-            <Link href={`tel:${APP_CONFIG.phone}`}>
+            <Link href={`tel:${APP_CONFIG.phoneE164}`}>
               <Phone className="mr-2 h-5 w-5" />
               {APP_CONFIG.phone}
             </Link>

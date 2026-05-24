@@ -27,6 +27,7 @@ import {
 } from '@/components/booking/BookingSkeletons';
 import { format, addDays, isBefore, isSameDay, startOfToday } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { DoctorAvatar } from '@/components/shared/DoctorAvatar';
 
 type BookingStep = 'location' | 'service' | 'doctor' | 'datetime' | 'confirm';
 
@@ -58,6 +59,7 @@ interface Service {
 interface Doctor {
   id: string;
   name: string;
+  email?: string;
   avatar?: string;
   google_meet_enabled?: boolean;
   offers_online?: boolean;
@@ -458,46 +460,53 @@ function BookingPageContent() {
     fetchServices();
   }, [selectedLocation, selectedMode, preSelectedServiceSlug, selectedCenter, serviceParam, preSelectedCategory]);
 
-  // Fetch doctors when service is selected
+  // Fetch doctors when on doctor step with location + service selected
   useEffect(() => {
-    if (!selectedLocation || !selectedService) return;
-    
+    if (currentStep !== 'doctor' || !selectedLocation || !selectedService) return;
+
     const fetchDoctors = async () => {
       setLoadingDoctors(true);
       try {
-        const params = new URLSearchParams();
-        params.append('locationId', selectedLocation.id);
-        params.append('serviceId', selectedService.id);
-        // Add center filter if a specific center is selected
-        if (selectedLocation.centerId) {
-          params.append('centerId', selectedLocation.centerId);
+        const isOnline =
+          selectedMode === 'online' || selectedLocation.id === 'online';
+
+        const buildParams = (withCenter: boolean) => {
+          const params = new URLSearchParams();
+          params.append('locationId', isOnline ? 'online' : selectedLocation.id);
+          params.append('serviceId', selectedService.id);
+          if (selectedService.category) {
+            params.append('category', selectedService.category);
+          } else if (preSelectedCategory) {
+            params.append('category', preSelectedCategory);
+          }
+          if (withCenter && selectedLocation.centerId && !isOnline) {
+            params.append('centerId', selectedLocation.centerId);
+          }
+          params.append('mode', isOnline ? 'online' : selectedMode);
+          return params;
+        };
+
+        const load = async (params: URLSearchParams) => {
+          const res = await fetch(`/api/doctors?${params.toString()}`);
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.success) return [];
+          return data.data || [];
+        };
+
+        let list = await load(buildParams(true));
+        if (list.length === 0) {
+          list = await load(buildParams(false));
         }
-        // Add mode filter
-        if (selectedMode) {
-          params.append('mode', selectedMode);
-        }
-        
-        const res = await fetch(`/api/doctors?${params.toString()}`);
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok) {
-          console.warn('Doctors fetch failed:', res.status, data?.error ?? data);
-          setDoctors([]);
-          return;
-        }
-        if (data.success) {
-          setDoctors(data.data || []);
-        } else {
-          console.warn('Doctors API:', data?.error || 'Unknown error');
-          setDoctors([]);
-        }
+        setDoctors(list);
       } catch (err) {
         console.error('Failed to fetch doctors:', err);
+        setDoctors([]);
       } finally {
         setLoadingDoctors(false);
       }
     };
     fetchDoctors();
-  }, [selectedLocation, selectedService, selectedMode]);
+  }, [currentStep, selectedLocation, selectedService, selectedMode, preSelectedCategory]);
 
   // Fetch time slots when doctor, date, duration, or mode changes
   useEffect(() => {
@@ -875,10 +884,12 @@ function BookingPageContent() {
                       <>
                         <div className="text-center mb-8">
                           <div className="flex items-center justify-center gap-4 mb-4">
-                            <img
-                              src={selectedDoctor.avatar || `https://api.dicebear.com/9.x/lorelei/svg?seed=${selectedDoctor.name}`}
-                              alt={selectedDoctor.name}
-                              className="w-16 h-16 rounded-full border-2 border-cyan-200"
+                            <DoctorAvatar
+                              name={selectedDoctor.name}
+                              email={selectedDoctor.email}
+                              avatar={selectedDoctor.avatar}
+                              size="lg"
+                              border
                             />
                             <div className="text-left">
                               <h2 className="text-xl font-semibold text-gray-900">{selectedDoctor.name}</h2>
@@ -1296,10 +1307,12 @@ function BookingPageContent() {
                     <div className="text-center mb-8">
                       {isDoctorFlow && selectedDoctor && (
                         <div className="flex items-center justify-center gap-3 mb-4">
-                          <img
-                            src={selectedDoctor.avatar || `https://api.dicebear.com/9.x/lorelei/svg?seed=${selectedDoctor.name}`}
-                            alt={selectedDoctor.name}
-                            className="w-12 h-12 rounded-full border-2 border-cyan-200"
+                          <DoctorAvatar
+                            name={selectedDoctor.name}
+                            email={selectedDoctor.email}
+                            avatar={selectedDoctor.avatar}
+                            size="sm"
+                            border
                           />
                           <div className="text-left">
                             <p className="text-sm font-medium text-gray-900">{selectedDoctor.name}</p>
@@ -1352,11 +1365,11 @@ function BookingPageContent() {
                                       const center = centersInCity[0];
                                       setSelectedCenter(center);
                                       setSelectedLocation({
-                                        id: center.id,
+                                        id: center.location_id || center.location?.id || center.id,
                                         name: center.name,
                                         city: center.city,
                                         address: center.address || '',
-                                        tier: 1,
+                                        tier: center.location?.tier || 1,
                                         centerId: center.id,
                                         centerName: center.name,
                                       });
@@ -1399,11 +1412,11 @@ function BookingPageContent() {
                                     setSelectedCenter(center);
                                     setSelectedCity(center.city);
                                     setSelectedLocation({
-                                      id: center.id,
+                                      id: center.location_id || center.location?.id || center.id,
                                       name: center.name,
                                       city: center.city,
                                       address: center.address || '',
-                                      tier: 1,
+                                      tier: center.location?.tier || 1,
                                       centerId: center.id,
                                       centerName: center.name,
                                     });
@@ -1949,10 +1962,11 @@ function BookingPageContent() {
                         }}
                       >
                         <div className="flex items-start gap-4">
-                          <img 
-                            src={doctor.avatar || `https://api.dicebear.com/9.x/lorelei/svg?seed=${doctor.name}&backgroundColor=b6e3f4`}
-                            alt={doctor.name}
-                            className="w-14 h-14 rounded-full"
+                          <DoctorAvatar
+                            name={doctor.name}
+                            email={doctor.email}
+                            avatar={doctor.avatar}
+                            size="md"
                           />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-start justify-between mb-1">

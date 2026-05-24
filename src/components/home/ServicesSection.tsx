@@ -11,7 +11,7 @@ import { FEATURED_SERVICE_CARDS } from "@/constants/marketing-images";
 const CARDS = [
   {
     href: "/services/pain_relief_physiotherapy",
-    title: "Pain Relief & Physiotherapy",
+    title: "Pain Relief & Physiotherapy Care",
     accent: "cyan" as const,
     description:
       "Comprehensive pain relief and mobilization therapy for chronic and acute conditions.",
@@ -19,16 +19,18 @@ const CARDS = [
   },
   {
     href: "/services/advanced_rehabilitation",
-    title: "Advanced Rehabilitation",
+    title: "Advanced Rehabilitation & Recovery",
     accent: "teal" as const,
-    description: "Ortho, Neuro & Post-surgical rehabilitation for complete recovery.",
+    description:
+      "Ortho, Neuro & Post-surgical rehabilitation for complete recovery.",
     image: FEATURED_SERVICE_CARDS.advancedRehab,
   },
   {
     href: "/services/therapeutic_yoga",
-    title: "Therapeutic Yoga",
+    title: "Therapeutic Yoga & Wellness",
     accent: "teal" as const,
-    description: "Yoga sessions designed for healing, rehabilitation, and mind-body wellness.",
+    description:
+      "Yoga sessions designed for healing, rehabilitation, and mind-body wellness.",
     image: FEATURED_SERVICE_CARDS.therapeuticYoga,
   },
   {

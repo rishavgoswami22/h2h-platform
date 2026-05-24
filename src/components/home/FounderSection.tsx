@@ -50,7 +50,7 @@ export function FounderSection() {
               {/* Image — mobile: show full portrait (contain); sm+: cover + focal shift */}
               <div className="relative w-full overflow-hidden rounded-2xl border border-gray-800 bg-gray-950 aspect-[4/5] min-h-[280px] max-sm:min-h-[300px] max-sm:max-h-[min(72vh,520px)] sm:aspect-[3/4] sm:min-h-[420px] sm:max-h-[560px]">
                 <Image
-                  src="/founders-image--4k.png"
+                  src="/images/about/founders-group.webp"
                   alt="Dr. Sukdeb Mahanta — Founder, H2H Healthcare"
                   fill
                   className="object-contain object-top sm:object-cover sm:object-[center_22%]"

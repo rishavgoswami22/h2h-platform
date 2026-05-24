@@ -22,6 +22,34 @@ declare global {
 
 const TAWK_DEFER_MS = 5000;
 
+let tawkConsoleFilterInstalled = false;
+
+function isTawkRelatedStack(stack: string): boolean {
+  return /embed\.tawk\.to|twk-chunk|twk-vendor|\$_Tawk/i.test(stack);
+}
+
+/** Tawk's bundle sometimes calls console.error(true). Next devtools turns that into a full-screen overlay. */
+function installTawkConsoleErrorFilter(): void {
+  if (
+    tawkConsoleFilterInstalled ||
+    typeof window === 'undefined' ||
+    process.env.NODE_ENV !== 'development'
+  ) {
+    return;
+  }
+
+  tawkConsoleFilterInstalled = true;
+  const forward = console.error.bind(console);
+
+  console.error = (...args: unknown[]) => {
+    const stack = new Error().stack ?? '';
+    if (isTawkRelatedStack(stack)) {
+      return;
+    }
+    forward(...args);
+  };
+}
+
 function isTawkEmbedUrl(url: string | undefined): boolean {
   return !!url && url.includes('embed.tawk.to');
 }
@@ -54,6 +82,8 @@ export function TawkToChat({
       console.warn('Tawk.to: Missing propertyId or widgetId');
       return;
     }
+
+    installTawkConsoleErrorFilter();
 
     const embedSrc = `https://embed.tawk.to/${propertyId}/${widgetId}`;
 

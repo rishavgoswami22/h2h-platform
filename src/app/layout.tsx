@@ -45,14 +45,14 @@ export const metadata: Metadata = {
     title: "H2H Healthcare - Sports Rehab, Physiotherapy & Wellness",
     description:
       "Book sports rehab, physiotherapy, pain care, and yoga in India—clinic, online, or home visits where available.",
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'H2H Healthcare' }],
+    images: [{ url: '/images/hero/home-banner.webp', width: 1200, height: 630, alt: 'H2H Healthcare' }],
   },
   twitter: {
     card: "summary_large_image",
     title: "H2H Healthcare - Sports Rehab, Physiotherapy & Wellness",
     description:
       "Book sports rehab, physiotherapy, pain care, and yoga in India—clinic, online, or home visits where available.",
-    images: ['/og-image.png'],
+    images: ['/images/hero/home-banner.webp'],
   },
   robots: {
     index: true,
@@ -66,9 +66,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: "/h2h-short-logo.png", type: "image/png", sizes: "any" }],
-    shortcut: "/h2h-short-logo.png",
-    apple: "/h2h-short-logo.png",
+    icon: [{ url: "/images/brand/logo-short.webp", type: "image/webp", sizes: "any" }],
+    shortcut: "/images/brand/logo-short.webp",
+    apple: "/images/brand/logo-short.webp",
   },
   other: {
     'theme-color': '#0284c7',
@@ -98,9 +98,9 @@ export default function RootLayout({
               '@type': 'MedicalBusiness',
               name: 'H2H Healthcare',
               url: 'https://healtohealth.in',
-              logo: 'https://healtohealth.in/h2hLogo-caps.png',
+              logo: 'https://healtohealth.in/images/brand/logo-caps.webp',
               description: 'Comprehensive healthcare platform specializing in Sports Rehabilitation, Pain Management, Physiotherapy, and Yoga services across India.',
-              telephone: '+91-1800-123-4567',
+              telephone: '+91-62916-15560',
               address: {
                 '@type': 'PostalAddress',
                 addressCountry: 'IN',

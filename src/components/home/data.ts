@@ -11,7 +11,7 @@ import {
   Award,
   Trophy,
 } from "lucide-react";
-import { MARKETING_IMAGES } from "@/constants/marketing-images";
+import { MARKETING_IMAGES, PARTNER_LOGOS } from "@/constants/marketing-images";
 
 export const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Activity,
@@ -30,14 +30,9 @@ export const stats = [
 
 export const features = [
   {
-    title: "Expert physiotherapists",
-    description: "Licensed clinicians; many with sports and hospital backgrounds.",
-    icon: Video,
-  },
-  {
-    title: "Home visits (where available)",
-    description: "Same specialists when travel is hard—check your pin code at booking.",
-    icon: Calendar,
+    title: "Evidence-informed care",
+    description: "Protocols grounded in sports medicine and rehab research.",
+    icon: Phone,
   },
   {
     title: "Plans you can follow",
@@ -45,9 +40,14 @@ export const features = [
     icon: MapPin,
   },
   {
-    title: "Evidence-informed care",
-    description: "Protocols grounded in sports medicine and rehab research.",
-    icon: Phone,
+    title: "Home visits (where available)",
+    description: "Same specialists when travel is hard—check your pin code at booking.",
+    icon: Calendar,
+  },
+  {
+    title: "Expert physiotherapists",
+    description: "Licensed clinicians; many with sports and hospital backgrounds.",
+    icon: Video,
   },
 ];
 
@@ -72,18 +72,11 @@ export const testimonials = [
   },
 ];
 
-/** Files in public/trusted-logos — partner marks for the home marquee */
-export const trustedPartnerLogos = [
-  { src: '/trusted-logos/logo1.png', alt: 'Partner organisation logo' },
-  { src: '/trusted-logos/logo2.png', alt: 'Partner organisation logo' },
-  { src: '/trusted-logos/logo3.png', alt: 'Partner organisation logo' },
-  { src: '/trusted-logos/logo4.png', alt: 'Partner organisation logo' },
-  { src: '/trusted-logos/logo5.png', alt: 'Partner organisation logo' },
-  { src: '/trusted-logos/logo6.png', alt: 'Partner organisation logo' },
-  { src: '/trusted-logos/logo7.png', alt: 'Partner organisation logo' },
-  { src: '/trusted-logos/logo8.png', alt: 'Partner organisation logo' },
-  { src: '/trusted-logos/logo10.png', alt: 'Partner organisation logo' },
-] as const;
+/** Partner marks for the home marquee (`public/images/partners`) */
+export const trustedPartnerLogos = PARTNER_LOGOS.map((src) => ({
+  src,
+  alt: 'Partner organisation logo',
+}));
 
 export const cities = [
   'Mumbai',
@@ -117,9 +110,11 @@ export const blogPosts = [
   {
     href: '/blog/sports-injury-recovery',
     title: 'Sports Injury Recovery Guide',
-    description: 'How structured rehab timelines help you return to sport or work safely.',
+    description:
+      'How structured rehab and load management help you return to sport safely.',
     color: 'teal',
     size: 'small',
+    image: MARKETING_IMAGES.sports,
   },
   {
     href: '/blog/home-exercises',
@@ -127,6 +122,7 @@ export const blogPosts = [
     description: 'Simple exercises you can do at home to relieve back pain and improve posture.',
     color: 'orange',
     size: 'small',
+    image: MARKETING_IMAGES.athleteTraining,
   },
   {
     href: '/blog/cardiac-rehabilitation',
@@ -142,14 +138,15 @@ export const blogPosts = [
     description: 'Discover how yoga can complement your physiotherapy journey for holistic wellness.',
     color: 'green',
     size: 'small',
+    image: MARKETING_IMAGES.yoga,
   },
 ];
 
 export const galleryItems = [
-  { id: '1', img: MARKETING_IMAGES.physio, height: 280, title: 'Modern Equipment', description: 'Latest physiotherapy tools' },
-  { id: '2', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=500&fit=crop', height: 350, title: 'Therapy Rooms', description: 'Private treatment spaces' },
-  { id: '3', img: 'https://images.unsplash.com/photo-1519824145371-296894a0daa9?w=600&h=350&fit=crop', height: 240, title: 'Rehabilitation Center', description: 'Full recovery support' },
-  { id: '4', img: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=600&h=450&fit=crop', height: 320, title: 'Exercise Area', description: 'Guided workout sessions' },
+  { id: '1', img: MARKETING_IMAGES.physio, height: 280, title: 'Clinical assessment', description: 'Hands-on physiotherapy' },
+  { id: '2', img: MARKETING_IMAGES.aboutMissionHealthcare, height: 350, title: 'Treatment space', description: 'Bright, equipped clinic rooms' },
+  { id: '3', img: MARKETING_IMAGES.rehab, height: 240, title: 'Rehabilitation', description: 'Supervised recovery sessions' },
+  { id: '4', img: MARKETING_IMAGES.sports, height: 320, title: 'Sports performance', description: 'Academy and field training' },
   { id: '5', img: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=600&h=380&fit=crop', height: 260, title: 'Gym Facilities', description: 'Strength training equipment' },
   { id: '6', img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=420&fit=crop', height: 300, title: 'Consultation Room', description: 'Expert assessments' },
   { id: '7', img: 'https://images.unsplash.com/photo-1576678927484-cc907957088c?w=600&h=350&fit=crop', height: 250, title: 'Hydrotherapy', description: 'Water-based treatments' },

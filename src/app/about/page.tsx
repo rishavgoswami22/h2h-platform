@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ABOUT_PAGE_IMAGES, MARKETING_IMAGES } from '@/constants/marketing-images';
+import { ABOUT_IMAGES, ABOUT_PAGE_IMAGES, MARKETING_IMAGES } from '@/constants/marketing-images';
 import { Header, Footer } from '@/components/layout';
 import { Highlighter } from '@/components/ui/highlighter';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
@@ -12,7 +12,7 @@ const leadershipTeam = [
   {
     name: 'Dr. Sukdeb Mahanta',
     role: 'Founder · High-Performance Director',
-    image: '/founders-image--4k.png',
+    image: ABOUT_IMAGES.foundersGroup,
     highlights: [
       '17+ years in elite sports medicine — cricket, football, hockey, boxing & Olympic pathways',
       'Leadership across National Excellence Centre (MoYAS), SAI NCOE, ISL & national academy environments',
@@ -22,7 +22,7 @@ const leadershipTeam = [
   {
     name: 'Dr. Akshat Singh Chouhan',
     role: 'Sports Physiotherapist',
-    image: '/about-us/akshat.png',
+    image: ABOUT_IMAGES.teamAkshat,
     highlights: [
       'On-field coverage — 38th National Games (Uttarakhand) & U-22 Asian Boxing Championship selection trials',
       'SAI National Centre of Excellence — rehab & load management across boxing, hockey, gymnastics & more',
@@ -32,7 +32,7 @@ const leadershipTeam = [
   {
     name: 'Dr. Deepti Ranjan Parida',
     role: 'Physiotherapist · Sports Medicine',
-    image: '/about-us/deepti-4k.jpg',
+    image: ABOUT_IMAGES.teamDeepti,
     highlights: [
       'Team physiotherapist — Bengal men’s U-25; long tenure with CAB junior men’s squads & domestic cricket',
       'Tournament exposure including Byju’s Bengal T-20 Challenge & continuous franchise-style camp coverage',
@@ -251,11 +251,12 @@ export default function AboutPage() {
                       alt={member.name}
                       fill
                       className={
-                        member.image.includes('founders-image--4k')
+                        member.image === ABOUT_IMAGES.foundersGroup
                           ? 'object-cover object-[center_18%] group-hover:scale-[1.02] transition-transform duration-500'
                           : 'object-cover object-top group-hover:scale-[1.02] transition-transform duration-500'
                       }
                       sizes="(max-width: 768px) 100vw, 33vw"
+                      unoptimized={member.image === ABOUT_IMAGES.teamAkshat}
                     />
                     <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
                   </div>

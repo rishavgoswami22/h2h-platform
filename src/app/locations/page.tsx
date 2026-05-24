@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useCallback, useEffect } from 'react';
 import Map, { Marker, Popup, NavigationControl, GeolocateControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -11,6 +12,7 @@ import { Highlighter } from "@/components/ui/highlighter";
 import { MapPin, Phone, Clock, Navigation2, Video, Building2, Loader2, ArrowRight } from "lucide-react";
 import { APP_CONFIG } from "@/constants/config";
 import { SERVICE_CATEGORIES } from "@/constants/services";
+import { CLINIC_CENTER_IMAGES, CLINIC_IMAGES } from "@/constants/marketing-images";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
 
@@ -55,7 +57,8 @@ const CITY_COORDINATES: Record<string, { lat: number; lng: number }> = {
   'Mumbai': { lat: 19.0760, lng: 72.8777 },
   'Bangalore': { lat: 12.9716, lng: 77.5946 },
   'Delhi': { lat: 28.6139, lng: 77.2090 },
-  'Kolkata': { lat: 22.5726, lng: 88.3639 },
+  'Kolkata': { lat: 22.4758, lng: 88.3575 },
+  'Bhubaneswar': { lat: 20.2961, lng: 85.8245 },
   'Chennai': { lat: 13.0827, lng: 80.2707 },
   'Hyderabad': { lat: 17.3850, lng: 78.4867 },
   'Pune': { lat: 18.5204, lng: 73.8567 },
@@ -456,29 +459,23 @@ export default function LocationsPage() {
                   const tier = center.location?.tier || 2;
                   const tierInfo = LOCATION_TIERS[tier as keyof typeof LOCATION_TIERS] || LOCATION_TIERS[2];
                   const isMetro = tier === 1;
-                  const cityImages: Record<string, string> = {
-                    'Mumbai': 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800',
-                    'Bangalore': 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=800',
-                    'Delhi': 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800',
-                    'Kolkata': 'https://images.unsplash.com/photo-1558431382-27e303142255?w=800',
-                    'Hyderabad': 'https://images.unsplash.com/photo-1572445271230-a78b4b5573e5?w=800',
-                    'Pune': 'https://images.unsplash.com/photo-1625731226721-b4d51ae70e20?w=800',
-                    'Jaipur': 'https://images.unsplash.com/photo-1477587458883-47145ed94245?w=800',
-                    'Chennai': 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800',
-                  };
-                  const image = cityImages[center.location?.city || ''] || 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800';
+                  const image =
+                    CLINIC_CENTER_IMAGES[center.slug] ||
+                    CLINIC_IMAGES.clinicInterior;
                   
                   return (
                     <div 
                       key={center.id} 
-                      className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:border-gray-200 transition-all duration-300"
+                      className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:border-gray-200 transition-[border-color,box-shadow] duration-200 ease-out"
                     >
                       {/* Image */}
-                      <div className="relative h-52 overflow-hidden">
-                        <img 
+                      <div className="relative h-52 overflow-hidden bg-gray-100">
+                        <Image
                           src={image}
                           alt={center.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover transform-gpu will-change-transform group-hover:scale-[1.03] transition-transform duration-300 ease-out"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
                         <div className={`absolute top-4 left-4 px-3 py-1.5 rounded-full text-[11px] font-medium ${isMetro ? 'bg-cyan-500' : 'bg-teal-500'} text-white`}>

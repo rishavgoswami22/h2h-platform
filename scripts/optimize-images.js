@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Image Optimization Script
- * Converts all images in public folder to WebP format
- * Run with: node scripts/optimize-images.js
+ * @deprecated Use Python optimizer: npm run optimize-images
+ * See scripts/optimize_images_to_webp.py
  */
 
 const fs = require('fs');

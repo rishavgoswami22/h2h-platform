@@ -7,7 +7,10 @@ export const APP_CONFIG = {
   email: 'support@healtohealth.in',
   /** H2H Absolute Performance — sports academies, federations, elite programmes */
   performanceEmail: 'h2hab.performance@gmail.com',
-  phone: '+91 1800 123 4567',
+  /** Display format */
+  phone: '+91 62916 15560',
+  /** For tel: links (no spaces) */
+  phoneE164: '+916291615560',
   social: {
     facebook: 'https://facebook.com/healtohealth',
     instagram: 'https://instagram.com/healtohealth',

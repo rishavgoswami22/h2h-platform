@@ -5,6 +5,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient, createAdminClient } from '@/lib/supabase/server';
+import { APP_CONFIG } from '@/constants/config';
 
 interface RouteParams {
   params: Promise<{ appointmentId: string }>;
@@ -72,7 +73,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
       company: {
         name: 'H2H Healthcare Pvt. Ltd.',
         address: 'Tower B, DLF Cyber City, Gurgaon, Haryana 122002',
-        phone: '+91 1800 123 4567',
+        phone: APP_CONFIG.phone,
         email: 'support@h2hhealthcare.com',
         gstin: '06AABCH1234A1Z5',
         website: 'www.h2hhealthcare.com',

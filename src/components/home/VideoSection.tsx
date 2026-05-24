@@ -24,9 +24,12 @@ export function VideoSection() {
             <span className="text-xs font-medium text-blue-700">Watch Our Story</span>
           </div>
           <h2 className="text-[32px] md:text-[40px] font-medium text-gray-900 mb-3 leading-tight">
-            Recovery,{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">explained clearly</span>
+            See how H2H Healthcare{' '}
+            <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">supports recovery</span>
           </h2>
+          <p className="text-[15px] text-gray-600 max-w-md mx-auto leading-relaxed">
+            Physiotherapy, sports rehab, and pain care—with straightforward booking and clinicians who explain your plan in plain language.
+          </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
@@ -79,7 +82,7 @@ export function VideoSection() {
               <HeroVideoDialog
                 animationStyle="from-center"
                 mp4Src="https://videos.pexels.com/video-files/5319980/5319980-sd_540_960_25fps.mp4"
-                thumbnailSrc={MARKETING_IMAGES.physio}
+                thumbnailSrc={MARKETING_IMAGES.videoIntro}
                 thumbnailAlt="Physiotherapy and rehabilitation care at H2H Healthcare"
                 className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg"
               />

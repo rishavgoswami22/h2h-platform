@@ -1,22 +1,49 @@
 /**
- * Service detail heroes + homepage featured cards — `/public/services-images`.
- * Matches top six `SERVICE_CATEGORIES` keys (digital health uses telehealth elsewhere).
+ * Production image paths — WebP only, under `/public/images/`.
  */
-const S = '/services-images';
+const IMG = '/images';
 
-export const SERVICE_CATEGORY_IMAGES = {
-  pain_relief_physiotherapy: `${S}/high_quality_professional_lifestyle_photography_for_a_physiotherapy_service._a_focused_physiotherapist_in_a_modern_clean_clinic_setting_working_with_a_patient_on_a_treatment_table_performing_a_gentle_manual_therapy.png`,
-  advanced_rehabilitation: `${S}/high_quality_professional_lifestyle_photography_for_an_advanced_rehabilitation_and_recovery_service._a_patient_working_with_a_specialist_in_a_high_tech_rehab_facility_with_modern_equipment._the_focus_is_on_a_succes.png`,
-  nutrition_lifestyle: `${S}/high_quality_professional_lifestyle_photography_for_a_nutrition_and_lifestyle_coaching_service._a_beautiful_top_down_shot_of_a_healthy_vibrant_meal_like_a_nourish_bowl_with_fresh_vegetables_grains_and_protein_on_a_.png`,
-  mental_wellness: `${S}/high_quality_professional_lifestyle_photography_for_mental_wellness_and_performance_care._a_peaceful_outdoor_scene_with_a_person_standing_in_a_meditative_pose_overlooking_a_calm_landscape_like_a_misty_mountain_or_a.png`,
-  therapeutic_yoga: `${S}/high_quality_professional_lifestyle_photography_for_a_therapeutic_yoga_and_wellness_service._a_serene_spacious_studio_with_soft_natural_light._a_small_diverse_group_of_people_are_practicing_a_gentle_yoga_pose_with_.png`,
-  /** Consultation / performance planning context */
-  sports_performance: `${S}/high_quality_professional_lifestyle_photography_for_a_general_healthcare_and_wellness_consultation_service._a_warm_inviting_consultation_room_where_a_friendly_professional_is_talking_with_a_patient._the_focus_is_on.png`,
+export const BRAND_IMAGES = {
+  logoCaps: `${IMG}/brand/logo-caps.webp`,
+  logoShort: `${IMG}/brand/logo-short.webp`,
 } as const;
 
-/**
- * Homepage “Comprehensive Services” 2×2 cards — same lifestyle set as service detail heroes.
- */
+export const HERO_IMAGES = {
+  homeBanner: `${IMG}/hero/home-banner.webp`,
+} as const;
+
+/** Real clinic photography */
+export const CLINIC_IMAGES = {
+  physioShoulderAssessment: `${IMG}/clinic/physio-shoulder-assessment.webp`,
+  physioManualTherapy: `${IMG}/clinic/physio-manual-therapy.webp`,
+  sportsSoccerAcademy: `${IMG}/clinic/sports-soccer-academy.webp`,
+  sportsAgilityHurdles: `${IMG}/clinic/sports-agility-hurdles.webp`,
+  athleteHamstringStretch: `${IMG}/clinic/athlete-hamstring-stretch.webp`,
+  strengthBarbellTraining: `${IMG}/clinic/strength-barbell-training.webp`,
+  performanceVo2Lab: `${IMG}/clinic/performance-vo2-lab.webp`,
+  biomechanicsMotionCapture: `${IMG}/clinic/biomechanics-motion-capture.webp`,
+  therapeuticYogaLunge: `${IMG}/clinic/therapeutic-yoga-lunge.webp`,
+  groupCoachingSession: `${IMG}/clinic/group-coaching-session.webp`,
+  rehabPlankSupervision: `${IMG}/clinic/rehab-plank-supervision.webp`,
+  balanceBosuRehab: `${IMG}/clinic/balance-bosu-rehab.webp`,
+  clinicianPortrait: `${IMG}/clinic/clinician-portrait.webp`,
+  clinicInterior: `${IMG}/clinic/clinic-interior.webp`,
+} as const;
+
+/** Stock / AI service hero art (short filenames) */
+export const SERVICE_STOCK_IMAGES = {
+  nutrition: `${IMG}/services/nutrition-coaching.webp`,
+} as const;
+
+export const SERVICE_CATEGORY_IMAGES = {
+  pain_relief_physiotherapy: CLINIC_IMAGES.physioManualTherapy,
+  advanced_rehabilitation: CLINIC_IMAGES.balanceBosuRehab,
+  nutrition_lifestyle: SERVICE_STOCK_IMAGES.nutrition,
+  mental_wellness: CLINIC_IMAGES.groupCoachingSession,
+  therapeutic_yoga: CLINIC_IMAGES.therapeuticYogaLunge,
+  sports_performance: CLINIC_IMAGES.performanceVo2Lab,
+} as const;
+
 export const FEATURED_SERVICE_CARDS = {
   painPhysio: SERVICE_CATEGORY_IMAGES.pain_relief_physiotherapy,
   advancedRehab: SERVICE_CATEGORY_IMAGES.advanced_rehabilitation,
@@ -24,59 +51,114 @@ export const FEATURED_SERVICE_CARDS = {
   sportsPerformance: SERVICE_CATEGORY_IMAGES.sports_performance,
 } as const;
 
-/**
- * Shared hero/card imagery for H2H marketing UI.
- * Prefer local assets for physio/rehab/sports; avoid ambiguous stock “medical desk / anatomy” shots.
- */
+export const ABOUT_IMAGES = {
+  foundersGroup: `${IMG}/about/founders-group.webp`,
+  teamAkshat: `${IMG}/about/dr-akshat-chouhan.webp`,
+  teamDeepti: `${IMG}/about/team-deepti.webp`,
+  homeVisits: `${IMG}/about/home-visits.webp`,
+} as const;
+
+/** Real clinic photos for location cards (by center slug) */
+export const CLINIC_CENTER_IMAGES: Record<string, string> = {
+  'h2h-kolkata-basdroni': CLINIC_IMAGES.clinicInterior,
+  'h2h-bhubaneswar-motive': CLINIC_IMAGES.physioManualTherapy,
+};
+
+export const TEAM_IMAGES = {
+  sayandeepPaul: `${IMG}/team/sayandeep-paul.webp`,
+  rishav: `${IMG}/team/rishav.webp`,
+  sayantan: `${IMG}/team/sayantan.webp`,
+} as const;
+
+/** Excellence gallery (homepage grid) — WebP in public/images/excellence */
+const E = `${IMG}/excellence`;
+
+export const EXCELLENCE_IMAGES = {
+  archeryTeam: `${E}/archery-team.webp`,
+  awardCeremony: `${E}/award-ceremony.webp`,
+  awardCeremonyAlt: `${E}/award-ceremony-alt.webp`,
+  bengalU19Cricket: `${E}/bengal-u19-cricket.webp`,
+  cclCricket: `${E}/ccl-cricket.webp`,
+  cclCricket2: `${E}/ccl-cricket-2.webp`,
+  cclCricket3: `${E}/ccl-cricket-3.webp`,
+  cricketMatch: `${E}/cricket-match.webp`,
+  cricketMatchAlt: `${E}/cricket-match-alt.webp`,
+  footballAthlete: `${E}/football-athlete.webp`,
+  footballDuo: `${E}/football-duo.webp`,
+  gymGroupAkshat: `${E}/gym-group-akshat.webp`,
+  hockeyChampions: `${E}/hockey-champions.webp`,
+  gymSessionAkshat: `${E}/gym-session-akshat.webp`,
+  mensHockeyTeam: `${E}/mens-hockey-team.webp`,
+  physioAkshat: `${E}/physio-akshat.webp`,
+  leadershipVisit: `${E}/leadership-visit.webp`,
+  rcbWomens: `${E}/rcb-womens.webp`,
+  saiNcoeYoga: `${E}/sai-ncoe-yoga.webp`,
+} as const;
+
+/** All 19 excellence photos for GridMotionSection (two passes in component) */
+export const EXCELLENCE_GALLERY = [
+  EXCELLENCE_IMAGES.saiNcoeYoga,
+  EXCELLENCE_IMAGES.hockeyChampions,
+  EXCELLENCE_IMAGES.cclCricket,
+  EXCELLENCE_IMAGES.cricketMatch,
+  EXCELLENCE_IMAGES.footballDuo,
+  EXCELLENCE_IMAGES.physioAkshat,
+  EXCELLENCE_IMAGES.gymSessionAkshat,
+  EXCELLENCE_IMAGES.rcbWomens,
+  EXCELLENCE_IMAGES.bengalU19Cricket,
+  EXCELLENCE_IMAGES.archeryTeam,
+  EXCELLENCE_IMAGES.awardCeremony,
+  EXCELLENCE_IMAGES.leadershipVisit,
+  EXCELLENCE_IMAGES.mensHockeyTeam,
+  EXCELLENCE_IMAGES.footballAthlete,
+  EXCELLENCE_IMAGES.cclCricket2,
+  EXCELLENCE_IMAGES.cricketMatchAlt,
+  EXCELLENCE_IMAGES.gymGroupAkshat,
+  EXCELLENCE_IMAGES.awardCeremonyAlt,
+  EXCELLENCE_IMAGES.cclCricket3,
+] as const;
+
+export const PARTNER_LOGOS = [
+  `${IMG}/partners/partner-01.webp`,
+  `${IMG}/partners/partner-02.webp`,
+  `${IMG}/partners/partner-03.webp`,
+  `${IMG}/partners/partner-04.webp`,
+  `${IMG}/partners/partner-05.webp`,
+  `${IMG}/partners/partner-06.webp`,
+  `${IMG}/partners/partner-07.webp`,
+  `${IMG}/partners/partner-08.webp`,
+  `${IMG}/partners/partner-10.webp`,
+] as const;
+
+/** @deprecated Use CLINIC_IMAGES — kept for gradual migration */
+export const MISC_IMAGES = CLINIC_IMAGES;
+
 export const MARKETING_IMAGES = {
-  physio: '/our-excellence/phsio-image-akshat.jpeg',
-  rehab: '/our-excellence/gym-image-akshat.jpeg',
-  sports: '/our-excellence/football.jpg',
-  /** SAI NCOE group session — matches Excellence grid imagery */
-  yoga: '/our-excellence/sai-ncoe-yoga.png',
-  /** Homepage hero full-bleed background */
-  heroSectionBanner: '/hero-section-banner.png',
-  /** Stay Connected section — consultation / support desk */
-  contactUs: '/contact-us.png',
-  /** Supervised exercise / active recovery (cardiac rehab, general fitness) */
-  activeRecovery: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=600&fit=crop',
-  athleteTraining: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop',
-  yogaStudio: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=600&fit=crop',
+  physio: CLINIC_IMAGES.physioShoulderAssessment,
+  videoIntro: CLINIC_IMAGES.physioManualTherapy,
+  rehab: CLINIC_IMAGES.rehabPlankSupervision,
+  sports: CLINIC_IMAGES.sportsSoccerAcademy,
+  yoga: CLINIC_IMAGES.therapeuticYogaLunge,
+  heroSectionBanner: HERO_IMAGES.homeBanner,
+  contactUs: CLINIC_IMAGES.clinicianPortrait,
+  activeRecovery: CLINIC_IMAGES.balanceBosuRehab,
+  athleteTraining: CLINIC_IMAGES.sportsAgilityHurdles,
+  yogaStudio: CLINIC_IMAGES.therapeuticYogaLunge,
   telehealth: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop',
-  nutrition: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=600&fit=crop',
-  mentalWellness: 'https://images.unsplash.com/photo-1545389336-cf090694435e?w=800&h=600&fit=crop',
-  /**
-   * About page — “Trusted by Champions” wide banner.
-   * Athletic training / performance context (Unsplash — fits sports rehab positioning).
-   */
-  aboutTrustedChampionsBanner:
-    'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1600&q=85&fit=crop&auto=format',
-  /**
-   * About “Our Mission” column — clinical / healthcare context (Unsplash).
-   */
-  aboutMissionHealthcare:
-    'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=1200&q=85&fit=crop&auto=format',
-  /**
-   * About ground-team section — real photo of hands together (not a UI screenshot).
-   */
-  aboutGroundTeamHands:
-    'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&h=600&fit=crop&q=80',
+  nutrition: SERVICE_STOCK_IMAGES.nutrition,
+  mentalWellness: CLINIC_IMAGES.groupCoachingSession,
+  aboutTrustedChampionsBanner: CLINIC_IMAGES.sportsSoccerAcademy,
+  aboutMissionHealthcare: CLINIC_IMAGES.clinicInterior,
+  aboutGroundTeamHands: CLINIC_IMAGES.groupCoachingSession,
 } as const;
 
-const ABOUT = '/about-us';
-
-/**
- * About page — four lifestyle shots in `public/about-us` (long `professional_lifestyle_*` filenames).
- * Optional `patient-first-care-handshake.jpg` is a shorter alias for the patient-first / handshake theme.
- */
 export const ABOUT_PAGE_IMAGES = {
-  patientFirstCareHandshakeJpg: `${ABOUT}/patient-first-care-handshake.jpg`,
-  patientFirstCareCard:
-    `${ABOUT}/professional_lifestyle_photography_for_a_patient_first_care_card._a_close_up_empathetic_shot_of_a_healthcare_provider_s_hand_on_a_patient_s_shoulder_or_a_warm_handshake_emphasizing_a_personal_and_personalized_conne.png`,
-  expertCareHands:
-    `${ABOUT}/professional_lifestyle_photography_for_a_expert_care_section._a_close_up_shot_of_a_healthcare_professional_s_hands_gently_adjusting_a_patient_s_posture_or_providing_guidance_emphasizing_precision_and_expertise._the.png`,
-  homeVisitsWide:
-    `${ABOUT}/professional_lifestyle_photography_for_a_home_visits_section._a_friendly_healthcare_professional_entering_a_bright_comfortable_and_modern_home_environment_greeted_warmly_by_a_patient._the_shot_is_wide_and_inviting_.png`,
-  evidenceLedWorkspace:
-    `${ABOUT}/professional_lifestyle_photography_for_an_evidence_led_care_section._a_modern_minimalist_workspace_with_a_tablet_or_laptop_displaying_clear_health_progress_charts_and_anatomical_diagrams._next_to_it_a_professional_.png`,
+  patientFirstCareHandshakeJpg: CLINIC_IMAGES.physioManualTherapy,
+  patientFirstCareCard: CLINIC_IMAGES.physioManualTherapy,
+  expertCareHands: CLINIC_IMAGES.physioShoulderAssessment,
+  homeVisitsWide: ABOUT_IMAGES.homeVisits,
+  evidenceLedWorkspace: CLINIC_IMAGES.clinicInterior,
 } as const;
+
+/** @deprecated Use EXCELLENCE_GALLERY */
+export const EXCELLENCE_AND_MISC_GALLERY = EXCELLENCE_GALLERY;

@@ -12,7 +12,7 @@ import { Clock, MapPin, Phone, Mail, ChevronDown, MessageCircle, ArrowRight } fr
 
 const Silk = dynamic(() => import('@/components/ui/silk'), { ssr: false });
 
-const phoneTel = `tel:${APP_CONFIG.phone.replace(/\s/g, '')}`;
+const phoneTel = `tel:${APP_CONFIG.phoneE164}`;
 
 const faqs = [
   {

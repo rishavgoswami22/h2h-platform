@@ -2,79 +2,25 @@
 
 import Link from "next/link";
 import { Header, Footer } from "@/components/layout";
-import { Button } from "@/components/ui/button";
 import { Highlighter } from "@/components/ui/highlighter";
 import { ArrowRight } from "lucide-react";
 import {
   ServiceSectionVisual,
   type ServiceVisualId,
 } from "@/components/services/ServiceSectionVisual";
+import { ServiceReadyCta } from "@/components/services/ServiceReadyCta";
+import {
+  SERVICE_PAGE_CONTENT,
+  SERVICE_READY_CTA,
+} from "@/constants/service-pages";
 
-const services = [
-  {
-    id: 'pain_relief_physiotherapy',
-    title: 'Pain Relief & Physiotherapy Care',
-    description:
-      'Help for back pain, neck pain, sports niggles, and everyday aches—using hands-on physio and movement you can actually stick to.',
-    details:
-      'We start by listening: how pain shows up, what makes it worse, and what you want to do again. Then we combine hands-on treatment, simple exercises, and home tips so you move more freely—with fewer big words and more real progress.',
-    color: 'red',
-  },
-  {
-    id: 'advanced_rehabilitation',
-    title: 'Advanced Rehabilitation & Recovery',
-    description:
-      'Structured support after surgery, stroke, or a serious injury—so you rebuild strength and confidence step by step.',
-    details:
-      'Whether you’re recovering from a joint replacement, a neurological setback, or a long hospital stay, we set clear, realistic goals—like walking farther, climbing stairs, or getting back to work—and adjust your plan as you improve.',
-    color: 'blue',
-  },
-  {
-    id: 'nutrition_lifestyle',
-    title: 'Nutrition & Lifestyle Care',
-    description:
-      'Practical eating and lifestyle guidance—no fad diets, just habits that fit your routine and your health goals.',
-    details:
-      'Our nutritionists help with everyday meals: more energy, steadier weight, better blood sugar, or fuel for sport. You’ll get ideas you can cook at home, not a rigid rulebook—because food should work for your family and your schedule.',
-    color: 'green',
-  },
-  {
-    id: 'mental_wellness',
-    title: 'Mental Wellness & Performance Care',
-    description:
-      'Support for stress, nerves, focus, and motivation—in sport, at work, or when life feels heavy.',
-    details:
-      'You’ll work with people who get pressure and recovery. We focus on simple tools: sleep, breathing, confidence, and balance—explained in plain language, with space to ask anything without judgement.',
-    color: 'purple',
-  },
-  {
-    id: 'therapeutic_yoga',
-    title: 'Therapeutic Yoga & Wellness',
-    description:
-      'Gentle yoga that respects pain and stiffness—breath, stretching, and strength at the level that’s right for you.',
-    details:
-      'Perfect if you’re healing from an injury, managing a long-term condition, or new to yoga. We slow things down, offer options for every body, and never push you into poses that don’t feel safe.',
-    color: 'teal',
-  },
-  {
-    id: 'sports_performance',
-    title: 'Sports Performance & Athlete Development',
-    description:
-      'Train smarter for your game—fitness, injury prevention, and coaching through our H2H Absolute Performance programme.',
-    details:
-      'For players, students, and clubs: we look at how you move, where you’re vulnerable, and how to get stronger and faster without breaking down. From preseason to coming back after time off, we’re on your side.',
-    color: 'orange',
-  },
-  {
-    id: 'digital_health',
-    title: 'Digital Health & Web Solutions',
-    description:
-      'Freelance web and product engineering—apps, internal tools, integrations. Clear scopes, direct line to the people building.',
-    details:
-      'We ship and iterate software for Heal to Health and other serious scopes: user-facing products, admin tools, and delivery you can sustain after launch—domain-agnostic when the problem is clear.',
-    color: 'cyan',
-  },
-];
+const services = Object.entries(SERVICE_PAGE_CONTENT).map(([id, content]) => ({
+  id,
+  title: content.title,
+  tagline: content.tagline,
+  description: content.intro,
+  details: content.details,
+}));
 
 export default function ServicesPage() {
   return (
@@ -94,7 +40,7 @@ export default function ServicesPage() {
                 </Highlighter>
               </h1>
               <p className="text-[15px] text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                From pain and rehab to nutrition, yoga, and sports—we explain things clearly and build a plan around you. No corporate jargon; just honest guidance you can understand and use.
+                From pain relief and advanced rehabilitation to nutrition, mental wellness, yoga, and sports performance—every programme is thoughtfully designed around you.
               </p>
             </div>
           </div>
@@ -116,6 +62,9 @@ export default function ServicesPage() {
                       {service.title}
                     </h2>
                   </div>
+                  <p className="text-[17px] font-medium text-cyan-700 mb-4 leading-snug">
+                    {service.tagline}
+                  </p>
                   <p className="text-[16px] text-gray-700 mb-4 leading-relaxed">
                     {service.description}
                   </p>
@@ -249,39 +198,10 @@ export default function ServicesPage() {
             </div>
           </div>
         </section>
-
-        {/* CTA Section */}
-        <section className="py-24 bg-gradient-to-br from-cyan-500 to-teal-500 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:40px_40px]" />
-          
-          <div className="max-w-[1200px] mx-auto px-6 text-center relative z-10">
-            <h2 className="text-[32px] md:text-[44px] font-medium text-white tracking-tight mb-6">
-              Not sure where to start?
-            </h2>
-            <p className="text-[15px] text-white/85 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Tell us what’s going on—we’ll suggest the right service and answer your questions. Book a free consultation and take it one easy step at a time.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                className="h-12 px-8 text-[14px] font-medium bg-white hover:bg-gray-100 text-gray-900 rounded-full"
-                asChild
-              >
-                <Link href="/booking">
-                  Book Free Consultation
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button 
-                className="h-12 px-8 text-[14px] font-medium bg-transparent border border-white/50 text-white hover:bg-white/10 rounded-full"
-                asChild
-              >
-                <Link href="/contact">
-                  Contact Us
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
+        <ServiceReadyCta
+          title={SERVICE_READY_CTA.title}
+          subtitle={SERVICE_READY_CTA.subtitle}
+        />
       </main>
 
       <Footer />

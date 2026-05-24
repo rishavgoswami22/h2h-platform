@@ -8,13 +8,7 @@ import { Button } from "@/components/ui/button";
 import { MARKETING_IMAGES } from "@/constants/marketing-images";
 import { avatarUrls } from "./data";
 
-const animatedWords = [
-  "Performance",
-  "Wellness",
-  "Strength",
-  "Health",
-  "Vitality",
-];
+const animatedWords = ["Health", "Wellness", "Strength", "Vitality"];
 
 const AvatarStack = memo(function AvatarStack() {
   return (
@@ -112,7 +106,10 @@ function HeroSectionComponent() {
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight min-h-[1.3em]"
                 aria-label={`Elevate Your ${animatedWords[currentWordIndex]}`}
               >
-                <span className="inline-block bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-500 bg-clip-text text-transparent drop-shadow-sm">
+                <span
+                  className="inline-block bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-500 bg-clip-text text-transparent drop-shadow-sm"
+                  suppressHydrationWarning
+                >
                   {displayText}
                   <span className="text-blue-500 animate-pulse font-light" aria-hidden="true">
                     |

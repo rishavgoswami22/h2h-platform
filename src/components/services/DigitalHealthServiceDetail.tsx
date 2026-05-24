@@ -4,27 +4,28 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Mail } from 'lucide-react';
 import { Header, Footer } from '@/components/layout';
+import { TEAM_IMAGES } from '@/constants/marketing-images';
 
 const CONTACT_EMAIL = 'official.sayandeeppaul@gmail.com';
 
 const SAYANDEEP = {
   name: 'Sayandeep Paul',
   role: 'Lead · delivery & client contact',
-  image: '/our-team/sayandeeppaul.jpg',
+  image: TEAM_IMAGES.sayandeepPaul,
 } as const;
 
 const TEAM_SECONDARY = [
   {
     name: 'Rishav Goswami',
     role: 'Backend & integrations',
-    image: '/our-team/rishav.jpg',
+    image: TEAM_IMAGES.rishav,
     line:
       'I own the server side and the glue—APIs, integrations, deploys—and I care that nothing falls over when traffic shows up for real.',
   },
   {
     name: 'Sayantan Pandey',
     role: 'Frontend & UI',
-    image: '/our-team/sayantan.jpg',
+    image: TEAM_IMAGES.sayantan,
     line:
       'I run the whole frontend: what people see, tap, and scroll through—layouts, flows, responsiveness, and polish so the product feels finished, not held together with hope.',
   },
@@ -131,6 +132,7 @@ export function DigitalHealthServiceDetail() {
                     className="object-cover object-center md:object-top"
                     sizes="(max-width: 768px) 100vw, 300px"
                     priority
+                    unoptimized
                   />
                 </div>
                 <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">

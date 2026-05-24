@@ -216,7 +216,7 @@ export function ContactMessageForm({ className }: ContactMessageFormProps) {
               Sending...
             </>
           ) : (
-            'Send message'
+            'Send Message'
           )}
         </Button>
       </form>

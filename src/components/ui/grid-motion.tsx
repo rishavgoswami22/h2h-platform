@@ -29,30 +29,41 @@ const GridMotion: FC<GridMotionProps> = ({ items = [], gradientColor = 'black' }
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     gsap.ticker.lagSmoothing(0);
 
     const handleMouseMove = (e: MouseEvent): void => {
       mouseXRef.current = e.clientX;
     };
 
+    let frame = 0;
+    const targetFps = 30;
+    const frameSkip = Math.max(1, Math.round(gsap.ticker.fps / targetFps));
+
     const updateMotion = (): void => {
+      frame += 1;
+      if (frame % frameSkip !== 0) return;
+
       const maxMoveAmount = 300;
-      const baseDuration = 0.12;
+      const baseDuration = 0.18;
       const inertiaFactors = [0.06, 0.04, 0.03, 0.02];
 
       rowRefs.current.forEach((row, index) => {
-        if (row) {
-          const direction = index % 2 === 0 ? 1 : -1;
-          const moveAmount = ((mouseXRef.current / window.innerWidth) * maxMoveAmount - maxMoveAmount / 2) * direction;
+        if (!row) return;
+        const direction = index % 2 === 0 ? 1 : -1;
+        const moveAmount =
+          ((mouseXRef.current / window.innerWidth) * maxMoveAmount - maxMoveAmount / 2) * direction;
 
-          gsap.to(row, {
-            x: moveAmount,
-            duration: baseDuration + inertiaFactors[index % inertiaFactors.length],
-            ease: 'power3.out',
-            overwrite: 'auto'
-          });
-        }
+        gsap.to(row, {
+          x: moveAmount,
+          duration: baseDuration + inertiaFactors[index % inertiaFactors.length],
+          ease: 'power2.out',
+          overwrite: 'auto',
+          force3D: true,
+        });
       });
     };
 
@@ -79,7 +90,7 @@ const GridMotion: FC<GridMotionProps> = ({ items = [], gradientColor = 'black' }
             <div
               key={rowIndex}
               className="grid gap-4 grid-cols-7"
-              style={{ willChange: 'transform, filter' }}
+              style={{ willChange: 'transform', transform: 'translateZ(0)' }}
               ref={el => {
                 if (el) rowRefs.current[rowIndex] = el;
               }}

@@ -5,6 +5,7 @@
 
 import { createClient } from '@/lib/supabase/server';
 import { NextRequest, NextResponse } from 'next/server';
+import { APP_CONFIG } from '@/constants/config';
 
 export async function GET(request: NextRequest) {
   try {
@@ -101,7 +102,7 @@ export async function GET(request: NextRequest) {
         address: 'Indiranagar, Bangalore 560038',
         gstin: 'GSTIN: 29AABCH1234A1Z5',
         email: 'support@healtohealth.in',
-        phone: '+91 1800 123 4567',
+        phone: APP_CONFIG.phone,
       },
     };
 

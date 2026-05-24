@@ -2,7 +2,7 @@ export const SERVICE_CATEGORIES = {
   pain_relief_physiotherapy: {
     name: 'Pain Relief & Physiotherapy Care',
     slug: 'pain-relief-physiotherapy',
-    description: 'Comprehensive pain relief and mobilization therapy for chronic and acute conditions',
+    description: 'Move Better. Recover Smarter. Perform Stronger.',
     icon: 'Heart',
     color: 'bg-red-500',
     gradient: 'from-red-500 to-rose-500',
@@ -10,7 +10,7 @@ export const SERVICE_CATEGORIES = {
   advanced_rehabilitation: {
     name: 'Advanced Rehabilitation & Recovery',
     slug: 'advanced-rehabilitation',
-    description: 'Ortho, Neuro & Post-surgical rehabilitation for complete recovery',
+    description: 'Restore Strength. Rebuild Confidence. Return to Life—Stronger.',
     icon: 'Activity',
     color: 'bg-blue-500',
     gradient: 'from-blue-500 to-indigo-500',
@@ -18,7 +18,7 @@ export const SERVICE_CATEGORIES = {
   nutrition_lifestyle: {
     name: 'Nutrition & Lifestyle Care',
     slug: 'nutrition-lifestyle',
-    description: 'Personalized nutrition plans and lifestyle modification coaching',
+    description: 'Fuel Your Body. Support Your Performance. Sustain Your Health.',
     icon: 'Apple',
     color: 'bg-green-500',
     gradient: 'from-green-500 to-emerald-500',
@@ -26,7 +26,7 @@ export const SERVICE_CATEGORIES = {
   mental_wellness: {
     name: 'Mental Wellness & Performance Care',
     slug: 'mental-wellness',
-    description: 'Sports psychology, stress management, and mental performance coaching',
+    description: 'Strengthen the Mind. Elevate Performance. Build Resilience.',
     icon: 'Brain',
     color: 'bg-purple-500',
     gradient: 'from-purple-500 to-violet-500',
@@ -34,7 +34,7 @@ export const SERVICE_CATEGORIES = {
   therapeutic_yoga: {
     name: 'Therapeutic Yoga & Wellness',
     slug: 'therapeutic-yoga',
-    description: 'Yoga sessions designed for healing, rehabilitation, and mind-body wellness',
+    description: 'Move Freely. Breathe Better. Restore Balance.',
     icon: 'Leaf',
     color: 'bg-teal-500',
     gradient: 'from-teal-500 to-cyan-500',
@@ -42,7 +42,7 @@ export const SERVICE_CATEGORIES = {
   sports_performance: {
     name: 'Sports Performance & Athlete Development',
     slug: 'sports-performance',
-    description: 'Integrated sports performance analysis, injury prevention, and athletic training',
+    description: 'Train with Precision. Perform with Confidence. Compete at Your Best.',
     icon: 'Trophy',
     color: 'bg-orange-500',
     gradient: 'from-orange-500 to-amber-500',

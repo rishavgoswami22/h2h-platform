@@ -5,6 +5,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/server';
+import { resolveDoctorAvatarSrc } from '@/constants/doctor-avatars';
 
 export async function GET(
   request: NextRequest,
@@ -172,7 +173,11 @@ export async function GET(
       name: doctor.users?.full_name || 'Doctor',
       email: doctor.users?.email,
       phone: doctor.users?.phone,
-      avatar: doctor.users?.avatar_url,
+      avatar: resolveDoctorAvatarSrc({
+        name: doctor.users?.full_name,
+        email: doctor.users?.email,
+        avatar: doctor.users?.avatar_url,
+      }),
       specializations: doctor.specializations || [],
       qualifications: doctor.qualifications || [],
       experienceYears: doctor.experience_years,

@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/favicon.ico",
-        destination: "/h2h-short-logo.png",
+        destination: "/images/brand/logo-short.webp",
         permanent: true,
       },
     ];

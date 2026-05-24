@@ -111,7 +111,7 @@ export default function RegisterPage() {
           <Link href="/" className="inline-flex items-center gap-2 mb-10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/h2hLogo-caps.png"
+              src="/images/brand/logo-caps.webp"
               alt="H2H Healthcare"
               className="h-12 sm:h-14 w-auto object-contain"
             />

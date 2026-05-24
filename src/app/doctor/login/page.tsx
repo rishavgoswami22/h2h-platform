@@ -142,7 +142,7 @@ export default function DoctorLoginPage() {
           {/* Logo */}
           <Link href="/" className="inline-flex items-center gap-2 mb-10">
             <img
-              src="/h2hLogo-caps.png"
+              src="/images/brand/logo-caps.webp"
               alt="H2H Healthcare"
               className="h-12 sm:h-14 w-auto object-contain"
             />

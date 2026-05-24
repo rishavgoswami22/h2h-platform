@@ -4,6 +4,7 @@
  */
 
 import { google } from 'googleapis';
+import { APP_CONFIG } from '@/constants/config';
 
 // Initialize Google OAuth2 client
 const getOAuth2Client = () => {
@@ -254,7 +255,7 @@ Mode: ${appointment.mode === 'online' ? 'Online (Video Consultation)' : appointm
     }
   }
 
-  description += `\n\nFor any queries, contact: +91 1800 123 4567`;
+  description += `\n\nFor any queries, contact: ${APP_CONFIG.phone}`;
 
   return {
     summary: `H2H: ${appointment.serviceName} with ${appointment.doctorName}`,
